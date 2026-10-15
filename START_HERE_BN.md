@@ -5,19 +5,23 @@
 নিজের game repo-র root-এ README-র one-command installer চালাবে। নতুন Unity project
 না থাকলে `--new-project` ব্যবহার করবে। এই repo-তেই game files ঢোকাবে না।
 
-## তিন agent-এর workflow
+## চার agent-এর workflow
 
-১. একজন Head, দুজন Worker। তুমি তাদের message copy-paste করবে।
+১. একজন Head, দুজন implementation Worker, একজন Reviewer/QA। তুমি তাদের message copy-paste করবে।
 ২. Head একই baseline SHA দিয়ে আলাদা file ownership ঠিক করবে।
 ৩. Gameplay worker controls/physics/camera করবে। Content worker assets/UI/scene wiring করবে।
-৪. Worker-রা Head-কে commit ও report দেবে। শুধু Head integrate/push করবে।
-৫. প্রতি ছোট edit-এ Unity test নয়। কাজের batch শেষে তুমি manual CI চালাবে।
+৪. Worker-রা Head-কে commit ও report দেবে। Head integrate করে QA-কে candidate diff review-এর brief দেবে।
+৫. QA findings ও ছোট test/check recommendation দেবে; নিজে runtime/scene files বদলাবে না।
+৬. শুধু Head fixes triage/integrate/push করবে। QA একই কাজ বারবার review/test করবে না।
+৭. প্রতি ছোট edit-এ Unity test নয়। কাজের batch শেষে তুমি manual CI চালাবে।
 
 Head-কে শুরুতে এই prompt দাও:
 
 > তুমি এই Android game-এর Head agent। AGENTS.md সম্পূর্ণ এবং agents/HEAD.md পড়ো।
-> মোট তিন agent: তুমি + Gameplay + Content; আমি message router। প্রথমে game brief
+> মোট চার agent: তুমি + Gameplay + Content + Reviewer/QA; আমি message router। প্রথমে game brief
 > ঠিক করো, তারপর ছোট playable batch-এর জন্য দুই worker-এর আলাদা copy-paste brief দাও।
+> দুই worker-এর কাজ integrate হলে exact candidate SHA দিয়ে QA review brief দেবে।
+> QA read-only থাকবে, শুধু আলাদা test files explicitly assign করলে লিখতে পারবে।
 > Exclusive paths, exact shared API, acceptance criteria, baseline SHA ও handoff format
 > থাকবে। Per-edit Unity tests/build নয়; batch ready হলে risk অনুযায়ী manual CI inputs
 > দেবে। নিজে CI/upload/release করবে না। কোনো check না চললে passed বলবে না।

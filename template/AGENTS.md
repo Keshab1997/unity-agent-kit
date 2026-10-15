@@ -2,12 +2,15 @@
 # Unity Android — agent operating contract
 Read all AGENTS.md before editing, including user notes below this managed block.
 
-## Human-routed team: three agents total
-Head briefs two workers in chat; the human copies briefs and returns handoffs.
+## Human-routed team: four agents total
+Head + Gameplay + Content + Reviewer/QA. The human copies briefs and returns handoffs.
+Head briefs two implementation workers first, then Reviewer/QA at the batch boundary.
 Head is NOT a background orchestrator. Never claim to have contacted another agent.
-Read agents/HEAD.md, agents/GAMEPLAY.md or agents/CONTENT.md for your role.
+Read agents/HEAD.md, agents/GAMEPLAY.md, agents/CONTENT.md or agents/QA.md for your role.
 Workers use separate checkouts. Head integrates; only Head pushes main.
 Never give both workers ownership of the same scene, prefab, meta or shared API.
+Reviewer/QA is read-only by default; only Head-assigned exclusive test files may be edited.
+QA does not replace worker-authored tests, launch CI, or become a second integrator.
 
 ## Implement first, check at the batch boundary
 - Cheap `python3 tool/preflight.py` before a commit. No Unity per tiny edit.

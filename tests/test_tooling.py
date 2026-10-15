@@ -25,6 +25,18 @@ class InstallerTests(unittest.TestCase):
         self.install(new=True);first=(self.root/'AGENTS.md').read_bytes()
         self.install(new=True);self.assertEqual(first,(self.root/'AGENTS.md').read_bytes())
         self.assertTrue((self.root/'Assets/UnityAgentKit/Editor/KitBuild.cs.meta').exists())
+    def test_four_agent_pack_installed(self):
+        self.install(new=True)
+        contract=(self.root/'AGENTS.md').read_text()
+        head=(self.root/'agents/HEAD.md').read_text()
+        qa=(self.root/'agents/QA.md').read_text()
+        self.assertIn('four agents total',contract)
+        self.assertIn('agents/QA.md',contract)
+        self.assertIn('Reviewer/QA',head)
+        self.assertIn('exact integrated candidate SHA',head)
+        self.assertIn('Read-only by default',qa)
+        self.assertIn('No push, merge, CI dispatch',qa)
+        self.assertIn('exclusive test paths',head)
     def test_dry_run_writes_nothing(self):
         self.install(new=True,dry=True);self.assertFalse(self.root.exists())
     def test_conflict_is_non_destructive(self):

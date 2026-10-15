@@ -3,7 +3,7 @@
 
 [বাংলায় শুরু করার নির্দেশ](START_HERE_BN.md) · [Validation evidence](VALIDATION.md)
 
-Reusable Android Unity tooling for **one Head + two human-routed workers**.
+Reusable Android Unity tooling for **one Head + two implementation workers + one Reviewer/QA**.
 Python standard-library tools; pinned GitHub Actions; no automatic CI on push.
 
 > **Status:** v1 source/tooling implementation. Unity compilation, package resolution,
@@ -40,7 +40,7 @@ No forced upgrade path: changed managed files require manual diff/merge.
 ## What's included
 | Component | Job |
 |---|---|
-| Head / Gameplay / Content briefs | Human-copy-paste team; exclusive file ownership |
+| Head / Gameplay / Content / Reviewer-QA briefs | Human-copy-paste team; exclusive file ownership |
 | preflight.py | Syntax/JSON, merge markers, common secrets, generated files, meta/GUID checks |
 | plan_checks.py | Changed-file risk recommendation; never launches tests |
 | doctor.py | Local readiness, no secret values |
@@ -55,8 +55,9 @@ No forced upgrade path: changed managed files require manual diff/merge.
 ## Fast daily loop
 1. Head writes two briefs; you forward them to workers.
 2. Workers implement in separate checkouts, add tests and run cheap preflight.
-3. Head integrates on main; no worker push race, no full battery per edit.
-4. At a useful batch boundary, Head recommends check scope.
+3. Head integrates; Reviewer/QA reviews the candidate diff (read-only unless assigned test files).
+4. Head triages findings, pushes main and recommends checks at a useful batch boundary.
+   Tiny low-risk tasks may skip a separate QA handoff; record why. No full battery per edit.
 5. **You** choose Actions → Unity Android → Run workflow.
 6. If red: read log first; one focused fix; same failure twice → STOP and handoff.
 
@@ -86,3 +87,9 @@ visual/device certification, or automatic Unity upgrades. Add these only when th
 actual game needs them and the owner approves.
 
 MIT licensed. See [agent contract](AGENTS.md) and [consumer rules](template/AGENTS.md).
+
+## Existing installations: four-agent instructions
+New installs include agents/QA.md automatically. For existing games, review/merge the
+updated managed AGENTS block and role instructions, preserving all owner notes. The
+installer deliberately refuses changed-file overwrites; it is not an upgrade command.
+No new workflow, secret or SDK is required for the fourth role.

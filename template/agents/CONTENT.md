@@ -9,3 +9,6 @@ No gameplay API edits or paid API/dependency without agreement. Do not launch Un
 for every edit; return Editor setup scripts if execution is unavailable.
 Return commit SHA, paths, preflight, test-not-run, imports needing validation,
 visual screenshots if actually captured, and mobile performance/visual QA checklist.
+
+Reviewer/QA reviews the integrated batch later. Keep writing your own focused tests;
+QA is not a substitute. Fixes come through Head, not concurrent edits to your files.
