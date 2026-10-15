@@ -12,7 +12,7 @@ def validate(env,config):
     if stage=='targeted' and not re.fullmatch(r'[A-Za-z0-9_.;,]+',env.get('KIT_FILTER','')):
         errors.append('Targeted stage requires exact class/method filter (letters/digits/underscore/dot/semicolon/comma only)')
     if stage in {'build','internal'}:
-        for key in ('ANDROID_KEYSTORE_BASE64','ANDROID_KEYSTORE_PASS','ANDROID_KEYALIAS_NAME','ANDROID_KEYALIAS_PASS'):
+        for key in ('ANDROID_KEYSTORE_BASE64','KEYSTORE_PASSWORD','KEY_ALIAS','KEY_PASSWORD'):
             if not env.get(key): errors.append(f'Missing GitHub secret: {key}')
         code=env.get('KIT_VERSION_CODE','')
         if not code.isdigit() or not 1<=int(code)<=2100000000: errors.append('Explicit valid versionCode required; must exceed all prior Play uploads')

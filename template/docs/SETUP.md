@@ -40,9 +40,22 @@ Reuse the existing game's UPLOAD keystore. Do not confuse it with Play App Signi
 app-signing key. For a brand-new game, generate an upload key locally only with owner
 approval; back it up securely. Add repo secrets yourself:
 - ANDROID_KEYSTORE_BASE64 — base64 contents of upload keystore
-- ANDROID_KEYSTORE_PASS
-- ANDROID_KEYALIAS_NAME
-- ANDROID_KEYALIAS_PASS
+- KEYSTORE_PASSWORD — keystore password
+- KEY_ALIAS — upload key alias
+- KEY_PASSWORD — upload key password
+
+These signing names and PLAY_SERVICE_ACCOUNT_JSON match flutter-builder exactly.
+Names match, but GitHub does not copy secret VALUES between repositories. Add them
+in the actual GAME repo, not unity-agent-kit or flutter-builder. For an existing
+published app use that app's correct upload key; matching names do not mean all apps
+should share a signing key.
+
+Migration from the initial kit: ANDROID_KEYSTORE_PASS → KEYSTORE_PASSWORD,
+ANDROID_KEYALIAS_NAME → KEY_ALIAS, ANDROID_KEYALIAS_PASS → KEY_PASSWORD.
+If already installed, manually review/merge the updated workflow and ci_gate.py;
+the conservative installer refuses to overwrite changed files. Add the canonical
+secret names yourself before build/internal. Old secret names alone no longer work;
+this change does not rename/copy/delete any actual GitHub secrets.
 
 No auto-generation/rotation and no key values in this repository.
 
@@ -51,7 +64,11 @@ Create/choose a Google Cloud project, enable Google Play Android Developer API,
 create a dedicated service account and securely obtain its JSON credentials.
 In Play Console, invite that service account and grant ONLY the target app and
 permissions needed to manage testing releases (not production/admin).
-Add PLAY_SERVICE_ACCOUNT_JSON via GitHub's secrets UI yourself.
+Add PLAY_SERVICE_ACCOUNT_JSON via GitHub's secrets UI yourself (raw JSON, not Base64).
+If reusing an existing Flutter Play service account, explicitly grant it testing-release
+access to the new game in Play Console, then add the original JSON to the game's repo.
+GitHub cannot reveal an existing stored secret for copying. Per-app service accounts
+reduce the impact of a leaked credential; broad production/admin access is unnecessary.
 
 Create/configure GitHub environment `play-internal` in the GAME repo. Restrict it to
 main; add required human reviewers if available, and disable self-review as desired.

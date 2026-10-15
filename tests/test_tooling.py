@@ -80,7 +80,24 @@ class RiskTests(unittest.TestCase):
 
 class GateTests(unittest.TestCase):
     def env(self):
-        return {key:'configured' for key in ('UNITY_LICENSE','UNITY_EMAIL','UNITY_PASSWORD','ANDROID_KEYSTORE_BASE64','ANDROID_KEYSTORE_PASS','ANDROID_KEYALIAS_NAME','ANDROID_KEYALIAS_PASS','PLAY_SERVICE_ACCOUNT_JSON')}
+        return {key:'configured' for key in ('UNITY_LICENSE','UNITY_EMAIL','UNITY_PASSWORD','ANDROID_KEYSTORE_BASE64','KEYSTORE_PASSWORD','KEY_ALIAS','KEY_PASSWORD','PLAY_SERVICE_ACCOUNT_JSON')}
+    def test_flutter_signing_names_required_individually(self):
+        env=self.env();env.update(KIT_STAGE='build',KIT_VERSION_CODE='100',KIT_TARGET_API='36')
+        config={'packageName':'com.owner.game'}
+        self.assertEqual([],gate.validate(env,config))
+        for key in ('ANDROID_KEYSTORE_BASE64','KEYSTORE_PASSWORD','KEY_ALIAS','KEY_PASSWORD'):
+            with self.subTest(key=key):
+                missing=dict(env);del missing[key]
+                self.assertIn('Missing GitHub secret: '+key,gate.validate(missing,config))
+    def test_workflow_maps_flutter_names_to_builder_inputs(self):
+        workflow=(ROOT/'template/.github/workflows/unity-android.yml').read_text()
+        for field,secret in {'androidKeystoreBase64':'ANDROID_KEYSTORE_BASE64',
+                             'androidKeystorePass':'KEYSTORE_PASSWORD',
+                             'androidKeyaliasName':'KEY_ALIAS',
+                             'androidKeyaliasPass':'KEY_PASSWORD'}.items():
+            self.assertIn(field+': ${{ secrets.'+secret+' }}',workflow)
+            self.assertIn(secret+': ${{ secrets.'+secret+' }}',workflow)
+        self.assertIn('serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}',workflow)
     def test_preflight_without_secrets(self):self.assertEqual([],gate.validate({},{}))
     def test_targeted_requires_filter(self):
         env=self.env();env['KIT_STAGE']='targeted';self.assertTrue(gate.validate(env,{}))
