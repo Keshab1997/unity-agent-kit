@@ -1,0 +1,41 @@
+# শুরু করো এখান থেকে
+
+## এই repo game নয়—সব game-এর common kit
+
+নিজের game repo-র root-এ README-র one-command installer চালাবে। নতুন Unity project
+না থাকলে `--new-project` ব্যবহার করবে। এই repo-তেই game files ঢোকাবে না।
+
+## তিন agent-এর workflow
+
+১. একজন Head, দুজন Worker। তুমি তাদের message copy-paste করবে।
+২. Head একই baseline SHA দিয়ে আলাদা file ownership ঠিক করবে।
+৩. Gameplay worker controls/physics/camera করবে। Content worker assets/UI/scene wiring করবে।
+৪. Worker-রা Head-কে commit ও report দেবে। শুধু Head integrate/push করবে।
+৫. প্রতি ছোট edit-এ Unity test নয়। কাজের batch শেষে তুমি manual CI চালাবে।
+
+Head-কে শুরুতে এই prompt দাও:
+
+> তুমি এই Android game-এর Head agent। AGENTS.md সম্পূর্ণ এবং agents/HEAD.md পড়ো।
+> মোট তিন agent: তুমি + Gameplay + Content; আমি message router। প্রথমে game brief
+> ঠিক করো, তারপর ছোট playable batch-এর জন্য দুই worker-এর আলাদা copy-paste brief দাও।
+> Exclusive paths, exact shared API, acceptance criteria, baseline SHA ও handoff format
+> থাকবে। Per-edit Unity tests/build নয়; batch ready হলে risk অনুযায়ী manual CI inputs
+> দেবে। নিজে CI/upload/release করবে না। কোনো check না চললে passed বলবে না।
+
+## একবার যা setup করতে হবে
+
+- Mac-এ Unity Hub দিয়ে Personal activation; credentials chat-এ নয়, GitHub Secrets-এ।
+- Game package ID, version name, Unity version ঠিক করা।
+- Existing app হলে তার upload keystore; নতুন key/rotation নিজে থেকে নয়।
+- Play service account permission + GitHub secret; internal environment protection।
+- বিস্তারিত game-এ install হওয়ার পর `docs/SETUP.md`-তে।
+
+## প্রথম validation
+
+এই kit repo-তে চাইলে manual **Kit Self Check** চালাবে। এটি শুধু Python tooling।
+Game repo-তে প্রথমে **Unity Android → preflight**, activation শেষে **full**।
+তারপর signing ঠিক হলে **build**, সব প্রস্তুত হলে **internal**।
+Internal-এ `UPLOAD INTERNAL` লিখতে হবে। Production option নেই।
+
+প্রথম Unity build/test/upload এখনো চালানো হয়নি। সব bug স্বয়ংক্রিয়ভাবে ধরা সম্ভব নয়।
+Phone-এ touch, camera, physics, pause/resume ও performance তোমাকে পরীক্ষা করতে হবে।

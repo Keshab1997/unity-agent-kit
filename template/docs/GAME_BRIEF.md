@@ -1,0 +1,12 @@
+# Game brief — fill with Head before implementation
+- Genre / core loop:
+- Small playable slice:
+- Audience / art style:
+- Portrait or landscape / touch controls:
+- Minimum device / target FPS / memory budget:
+- Offline/network / privacy / permissions:
+- Package ID (immutable after publishing):
+- Existing maximum Play versionCode:
+- Exact Unity version / render pipeline:
+- Explicit non-goals:
+- Acceptance criteria:
