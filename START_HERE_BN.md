@@ -7,7 +7,8 @@
 
 ## চার agent-এর workflow
 
-১. একজন Head, দুজন implementation Worker, একজন Reviewer/QA। তুমি তাদের message copy-paste করবে।
+১. Head + Agent A (Gameplay) + Agent B (Content/UI) + Agent C (Reviewer/QA)।
+Head সব plan, প্রশ্ন, brief ও report বাংলায় দেবে; তুমি message copy-paste করবে।
 ২. Head একই baseline SHA দিয়ে আলাদা file ownership ঠিক করবে।
 ৩. Gameplay worker controls/physics/camera করবে। Content worker assets/UI/scene wiring করবে।
 ৪. Worker-রা Head-কে commit ও report দেবে। Head integrate করে QA-কে candidate diff review-এর brief দেবে।

@@ -51,6 +51,16 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('Reviewer / QA',head_prompt)
         self.assertIn('HEAD_START_BN.md',start)
         self.assertIn('agents/IDEA.md',(self.root/'AGENTS.md').read_text())
+    def test_agent_letter_names_and_bengali_head(self):
+        self.install(new=True)
+        for filename,label in [('GAMEPLAY','Agent A'),('CONTENT','Agent B'),('QA','Agent C')]:
+            self.assertIn(label,(self.root/f'agents/{filename}.md').read_text().splitlines()[0])
+        head=(self.root/'agents/HEAD.md').read_text()
+        self.assertIn('সহজ বাংলায়',head)
+        contract=(self.root/'AGENTS.md').read_text()
+        self.assertIn('Bengali (বাংলা)',contract)
+        self.assertIn('Agent C',contract)
+        self.assertIn('report বাংলায়',(self.root/'docs/HEAD_START_BN.md').read_text())
     def test_dry_run_writes_nothing(self):
         self.install(new=True,dry=True);self.assertFalse(self.root.exists())
     def test_conflict_is_non_destructive(self):

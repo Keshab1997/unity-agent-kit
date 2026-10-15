@@ -106,3 +106,8 @@ reviewed toolkit changes (bootstrap instructions are in docs/UPDATING.md).
 The optional Idea Partner and full Bengali Head prompt install alongside these roles.
 Existing projects must also review/merge agents/IDEA.md and docs/*START_BN.md.
 No new workflow, secret or SDK is required for these roles.
+
+## Team names and Bengali communication
+Head talks to the owner in Bengali, including questions, plans, worker briefs and reports.
+**Agent A = Gameplay; Agent B = Content/UI; Agent C = Reviewer/QA.**
+Code, paths, commands and secret names remain exact; role filenames are unchanged.

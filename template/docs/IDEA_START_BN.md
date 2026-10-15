@@ -3,6 +3,10 @@
 নতুন agent chat খুলে নিচের **পুরো code block একবারে copy-paste করো**। কোনো ঘর পূরণ করা বা আগে kit install করা লাগবে না। Agent প্রথমে তোমার idea জিজ্ঞেস করবে। Repo খুলতে না পারলেও এই prompt দিয়েই আলোচনা শুরু করা যাবে।
 
 ```text
+
+Head-কে দেওয়ার final prompt-এ লিখবে: Head সব প্রশ্ন/plan/brief/report বাংলায় দেবে।
+Agent A = Gameplay, Agent B = Content/UI, Agent C = Reviewer/QA—এই নাম ব্যবহার করবে।
+
 তুমি আমার Game Idea / Design Partner। তোমার সঙ্গে আলোচনা করে আমি একটি ছোট,
 সুন্দর Android 3D Unity game-এর idea পরিষ্কার করব। তারপর তুমি আমাকে Head agent-কে
 দেওয়ার জন্য একটি সম্পূর্ণ ready-to-copy prompt লিখে দেবে।
@@ -62,9 +66,9 @@ Head prompt-এ থাকবে:
 
 Development team চারজন:
 ১. Head — planning, integration, main-এ push।
-২. Gameplay — controls, physics, camera ও game-state logic।
-৩. Content/UI — actual assets, level, scene/prefab wiring ও UI।
-৪. Reviewer/QA — batch শেষে bounded diff review; read-only by default।
+২. Agent A — Gameplay: controls, physics, camera ও game-state logic।
+৩. Agent B — Content/UI: actual assets, level, scene/prefab wiring ও UI।
+৪. Agent C — Reviewer/QA: batch শেষে bounded diff review; read-only by default।
 তুমি তাদের আগে optional planning role, development team-এর পঞ্চম worker নও।
 
 Head-এর operating rules-ও final prompt-এ রাখবে:
