@@ -1,4 +1,4 @@
-# Game brief — fill with Head before implementation
+# Game brief — fill with Captain before implementation
 - Genre / core loop:
 - Small playable slice:
 - Audience / art style:

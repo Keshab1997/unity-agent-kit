@@ -3,7 +3,7 @@
 
 [বাংলায় শুরু করার নির্দেশ](START_HERE_BN.md) · [Validation evidence](VALIDATION.md)
 
-Reusable Android Unity tooling for **one Head + two implementation workers + one Reviewer/QA**.
+Reusable Android Unity tooling for **Captain + three parallel implementation workers (Agent A/B/C)**.
 An optional **Game Idea / Design Partner** helps refine the concept before development.
 Start with [Idea chat](template/docs/IDEA_START_BN.md), then forward its filled
 [Head prompt](template/docs/HEAD_START_BN.md). These are role instructions for chats
@@ -47,7 +47,7 @@ apply a reviewed exact commit, refuse conflicts. No forced overwrite.
 | Component | Job |
 |---|---|
 | Idea Partner + Head starter prompts | Discuss concept, then copy a self-contained brief to Head |
-| Head / Gameplay / Content / Reviewer-QA briefs | Human-copy-paste team; exclusive file ownership |
+| Captain / Agent A / Agent B / Agent C briefs | Human-copy-paste team; exclusive file ownership |
 | preflight.py | Syntax/JSON, merge markers, common secrets, generated files, meta/GUID checks |
 | kit_update.py | Read-only update check; pinned, conflict-safe apply with explicit workflow approval |
 | plan_checks.py | Changed-file risk recommendation; never launches tests |
@@ -56,26 +56,27 @@ apply a reviewed exact commit, refuse conflicts. No forced overwrite.
 | ci_gate.py | Missing config/secrets rejected before Unity downloads |
 | verify_test_results.py | Reject missing/empty/failed test evidence |
 | ci_watch.py | Read one real run / failed job log; no waiting or dispatch |
-| agent_loop.py | Head-only explicit-path commit and optional serialized push |
+| agent_loop.py | Role-checked branch commits/push; workers cannot use main |
 | Secrets Check workflow | Manual ✅/❌ readiness report, local signing probe, opt-in Google OAuth/Play read check |
 | Unity Android workflow | Manual preflight, targeted/full tests, tested AAB, opt-in internal upload |
 | Minimal project source | Physics smoke tests + opt-in prototype scene creation at build |
 
 ## Fast daily loop
-0. Optional: discuss with Idea Partner; forward its finalized prompt to Head.
-1. Head writes two briefs; you forward them to workers.
-2. Workers implement in separate checkouts, add tests and run cheap preflight.
-3. Head integrates; Reviewer/QA reviews the candidate diff (read-only unless assigned test files).
-4. Head triages findings, pushes main and recommends checks at a useful batch boundary.
-   Tiny low-risk tasks may skip a separate QA handoff; record why. No full battery per edit.
-5. **You** choose Actions → Unity Android → Run workflow.
-6. If red: read log first; one focused fix; same failure twice → STOP and handoff.
+0. Optional Idea Partner returns a filled Captain prompt.
+1. Captain gives THREE short Bengali copy-paste blocks (8–10 lines each), one small
+   deliverable per Agent A/B/C, with one baseline and exclusive paths/shared APIs.
+2. A (gameplay), B (3D art), C (scene/UI/audio) work concurrently in separate checkouts.
+3. Workers push only work/agent-a/<task>, work/agent-b/<task>, work/agent-c/<task>.
+4. Owner returns branch/SHA reports; Captain fetches, reviews, checks and merges main.
+5. No separate QA agent. Captain performs review/testing; risk-based Unity checks at
+   useful batch boundaries, human-dispatched CI only. Branches can still conflict.
+6. No force-push, automatic conflict resolution, PR/tag/release or branch deletion.
 
 ```bash
 python3 tool/doctor.py
 python3 tool/preflight.py
 python3 tool/plan_checks.py --base <batch-start-sha>
-python3 tool/agent_loop.py --role head --files Assets/MyFeature.cs Assets/MyFeature.cs.meta -m "feat(gameplay): add feature" --push
+python3 tool/agent_loop.py --role captain --files Assets/MyFeature.cs Assets/MyFeature.cs.meta -m "feat(gameplay): add feature" --push
 ```
 
 The above `tool/` commands apply AFTER installing into a game. This kit repo's
@@ -98,16 +99,11 @@ actual game needs them and the owner approves.
 
 MIT licensed. See [agent contract](AGENTS.md) and [consumer rules](template/AGENTS.md).
 
-## Existing installations: four-agent instructions
-New installs include agents/QA.md automatically. For existing games, review/merge the
-updated managed AGENTS block and role instructions, preserving all owner notes. The
-installer deliberately refuses changed-file overwrites; use the safe updater for
-reviewed toolkit changes (bootstrap instructions are in docs/UPDATING.md).
-The optional Idea Partner and full Bengali Head prompt install alongside these roles.
-Existing projects must also review/merge agents/IDEA.md and docs/*START_BN.md.
-No new workflow, secret or SDK is required for these roles.
-
-## Team names and Bengali communication
-Head talks to the owner in Bengali, including questions, plans, worker briefs and reports.
-**Agent A = Gameplay; Agent B = Content/UI; Agent C = Reviewer/QA.**
-Code, paths, commands and secret names remain exact; role filenames are unchanged.
+## Current team and older installations
+**Captain** (formerly Head) talks briefly in Bengali. **Agent A = gameplay/physics/camera;
+Agent B = 3D art/materials/animation; Agent C = scene/level/UI/audio.** There is no
+separate QA agent. Workers branch/push; only Captain reviews/merges/pushes main.
+Role policy is coordination, not GitHub branch-protection enforcement.
+Read [Captain prompt](template/docs/CAPTAIN_START_BN.md). Legacy HEAD.md points to
+CAPTAIN.md; QA.md is retired. Existing games use the safe updater/manual merge;
+no forced overwrite. Shared files/folder meta still need exclusive ownership.
