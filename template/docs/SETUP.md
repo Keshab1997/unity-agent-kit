@@ -148,3 +148,8 @@ all rows. Signing/Play secrets may legitimately be absent before those features 
 
 Public run summaries expose only secret names/status, not values. Run only trusted main
 code. New game repos need their own secrets; nothing is copied from the kit repo.
+
+## Updating the installed toolkit
+See [UPDATING.md](UPDATING.md). Use `python3 tool/kit_update.py --check`, then apply
+only a reviewed exact commit. No auto-sync; conflicts stop writes and workflow
+changes require explicit owner approval. Game assets/settings/identity remain untouched.

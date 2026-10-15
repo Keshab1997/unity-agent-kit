@@ -40,7 +40,8 @@ Play upload. Refuses conflicting files and symlink paths before writing; merges
 .gitignore, preserves existing AGENTS owner notes and project identity. Installs only
 repo-root projects in v1. Existing projects keep settings/packages; kit includes
 Editor build helper plus smoke tests. Review imports/dependencies before Unity run.
-No forced upgrade path: changed managed files require manual diff/merge.
+For existing installs use the [safe updater](template/docs/UPDATING.md): check first,
+apply a reviewed exact commit, refuse conflicts. No forced overwrite.
 
 ## What's included
 | Component | Job |
@@ -48,6 +49,7 @@ No forced upgrade path: changed managed files require manual diff/merge.
 | Idea Partner + Head starter prompts | Discuss concept, then copy a self-contained brief to Head |
 | Head / Gameplay / Content / Reviewer-QA briefs | Human-copy-paste team; exclusive file ownership |
 | preflight.py | Syntax/JSON, merge markers, common secrets, generated files, meta/GUID checks |
+| kit_update.py | Read-only update check; pinned, conflict-safe apply with explicit workflow approval |
 | plan_checks.py | Changed-file risk recommendation; never launches tests |
 | doctor.py | Local readiness, no secret values |
 | blender_props.py | Optional original procedural crate generator; Blender required, never auto-run |
@@ -99,7 +101,8 @@ MIT licensed. See [agent contract](AGENTS.md) and [consumer rules](template/AGEN
 ## Existing installations: four-agent instructions
 New installs include agents/QA.md automatically. For existing games, review/merge the
 updated managed AGENTS block and role instructions, preserving all owner notes. The
-installer deliberately refuses changed-file overwrites; it is not an upgrade command.
+installer deliberately refuses changed-file overwrites; use the safe updater for
+reviewed toolkit changes (bootstrap instructions are in docs/UPDATING.md).
 The optional Idea Partner and full Bengali Head prompt install alongside these roles.
 Existing projects must also review/merge agents/IDEA.md and docs/*START_BN.md.
 No new workflow, secret or SDK is required for these roles.
