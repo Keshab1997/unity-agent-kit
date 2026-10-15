@@ -55,6 +55,7 @@ No forced upgrade path: changed managed files require manual diff/merge.
 | verify_test_results.py | Reject missing/empty/failed test evidence |
 | ci_watch.py | Read one real run / failed job log; no waiting or dispatch |
 | agent_loop.py | Head-only explicit-path commit and optional serialized push |
+| Secrets Check workflow | Manual ✅/❌ readiness report, local signing probe, opt-in Google OAuth/Play read check |
 | Unity Android workflow | Manual preflight, targeted/full tests, tested AAB, opt-in internal upload |
 | Minimal project source | Physics smoke tests + opt-in prototype scene creation at build |
 
