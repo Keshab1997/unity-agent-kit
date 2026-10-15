@@ -1,8 +1,9 @@
 # Implementation evidence — 2026-10-15
 
-- 29 focused Python unit tests passed: installer dry-run/idempotency/conflicts,
+- 29 initial focused Python unit tests passed: installer dry-run/idempotency/conflicts,
   owner notes/settings preservation, symlink safety, installed starter preflight,
   syntax/secrets/meta/GUID checks, risk selection, release gates and NUnit evidence.
+- After tightening the NotRunnable gate, all 6 result-gate tests passed (including a new NotRunnable case).
 - Preflight passed; no Unity invocation.
 - Both workflow YAML files parsed; triggers restricted to workflow_dispatch;
   every external action is pinned to a full commit SHA; all configured action inputs

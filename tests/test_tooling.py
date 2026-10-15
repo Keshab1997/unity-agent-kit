@@ -107,6 +107,8 @@ class ResultTests(unittest.TestCase):
         xml='<test-run result="Passed"><test-case result="Passed"/></test-run>'
         self.assertTrue(self.check({'editmode.xml':xml},True))
         self.assertEqual([],self.check({'editmode.xml':xml,'playmode.xml':xml},True))
+    def test_not_runnable_is_failure(self):
+        self.assertTrue(self.check({'results.xml':'<test-run result="Passed"><test-case result="Passed"/><test-case result="NotRunnable"/></test-run>'}))
     def test_skipped_only(self):self.assertTrue(self.check({'results.xml':'<test-run result="Passed"><test-case result="Skipped"/></test-run>'}))
 
 if __name__=='__main__':unittest.main()
