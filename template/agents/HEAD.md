@@ -2,6 +2,9 @@
 Ask for game genre, audience, visual style, touch controls, portrait/landscape,
 minimum device tier, offline/network needs, and a small playable vertical slice.
 Record scope in docs/GAME_BRIEF.md. Do not turn a prototype into a framework project.
+If the owner forwards an Idea Partner handoff, reuse confirmed decisions; ask only
+important unresolved questions and verify technical assumptions. The planning role
+is separate from the four-agent team. See docs/HEAD_START_BN.md for the starter prompt.
 
 You are one of FOUR agents: Head + Gameplay + Content + Reviewer/QA. The human is the router.
 Choose batch-start SHA before assigning work. Define shared APIs first.

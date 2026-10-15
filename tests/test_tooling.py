@@ -37,6 +37,20 @@ class InstallerTests(unittest.TestCase):
         self.assertIn('Read-only by default',qa)
         self.assertIn('No push, merge, CI dispatch',qa)
         self.assertIn('exclusive test paths',head)
+    def test_idea_role_and_head_prompts_installed(self):
+        self.install(new=True)
+        idea=(self.root/'agents/IDEA.md').read_text()
+        head_prompt=(self.root/'docs/HEAD_START_BN.md').read_text()
+        start=(self.root/'docs/IDEA_START_BN.md').read_text()
+        self.assertIn('fifth available role',idea)
+        self.assertIn('ONE complete',idea)
+        self.assertIn('No code/asset/scene edits',idea)
+        self.assertIn('docs/HEAD_START_BN.md',idea)
+        self.assertIn('```text',head_prompt)
+        self.assertIn('https://github.com/Keshab1997/unity-agent-kit',head_prompt)
+        self.assertIn('Reviewer / QA',head_prompt)
+        self.assertIn('HEAD_START_BN.md',start)
+        self.assertIn('agents/IDEA.md',(self.root/'AGENTS.md').read_text())
     def test_dry_run_writes_nothing(self):
         self.install(new=True,dry=True);self.assertFalse(self.root.exists())
     def test_conflict_is_non_destructive(self):

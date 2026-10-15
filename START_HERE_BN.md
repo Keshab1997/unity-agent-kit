@@ -15,16 +15,18 @@
 ৬. শুধু Head fixes triage/integrate/push করবে। QA একই কাজ বারবার review/test করবে না।
 ৭. প্রতি ছোট edit-এ Unity test নয়। কাজের batch শেষে তুমি manual CI চালাবে।
 
-Head-কে শুরুতে এই prompt দাও:
+## আগে idea আলোচনা করতে চাইলে
 
-> তুমি এই Android game-এর Head agent। AGENTS.md সম্পূর্ণ এবং agents/HEAD.md পড়ো।
-> মোট চার agent: তুমি + Gameplay + Content + Reviewer/QA; আমি message router। প্রথমে game brief
-> ঠিক করো, তারপর ছোট playable batch-এর জন্য দুই worker-এর আলাদা copy-paste brief দাও।
-> দুই worker-এর কাজ integrate হলে exact candidate SHA দিয়ে QA review brief দেবে।
-> QA read-only থাকবে, শুধু আলাদা test files explicitly assign করলে লিখতে পারবে।
-> Exclusive paths, exact shared API, acceptance criteria, baseline SHA ও handoff format
-> থাকবে। Per-edit Unity tests/build নয়; batch ready হলে risk অনুযায়ী manual CI inputs
-> দেবে। নিজে CI/upload/release করবে না। কোনো check না চললে passed বলবে না।
+আলাদা **Game Idea / Design Partner** role যোগ হয়েছে। তার সঙ্গে idea আলোচনা করবে;
+সে final copy-paste prompt বানাবে, তুমি সেটা Head-কে দেবে। এটি optional পঞ্চম role;
+মূল development team আগের চারজনই। কোনো agent নিজে থেকে চালু বা যোগাযোগ করে না।
+
+- **[Idea agent শুরু করার prompt](template/docs/IDEA_START_BN.md)**
+- **[Idea agent-এর সম্পূর্ণ instructions](template/agents/IDEA.md)**
+- **[Head-এর সম্পূর্ণ copy-paste prompt](template/docs/HEAD_START_BN.md)**
+
+Idea পরিষ্কার থাকলে সরাসরি Head prompt ব্যবহার করো। নতুন project-এ install করলে
+এগুলো `docs/IDEA_START_BN.md`, `agents/IDEA.md` ও `docs/HEAD_START_BN.md` হবে।
 
 ## একবার যা setup করতে হবে
 

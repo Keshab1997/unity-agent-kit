@@ -2,8 +2,10 @@
 # Unity Android — agent operating contract
 Read all AGENTS.md before editing, including user notes below this managed block.
 
-## Human-routed team: four agents total
+## Human-routed team: four agents total (development)
 Head + Gameplay + Content + Reviewer/QA. The human copies briefs and returns handoffs.
+An optional fifth role, Game Idea / Design Partner (agents/IDEA.md), discusses concepts
+before development and returns a self-contained Head prompt; it never edits or runs CI.
 Head briefs two implementation workers first, then Reviewer/QA at the batch boundary.
 Head is NOT a background orchestrator. Never claim to have contacted another agent.
 Read agents/HEAD.md, agents/GAMEPLAY.md, agents/CONTENT.md or agents/QA.md for your role.

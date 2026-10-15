@@ -4,6 +4,11 @@
 [বাংলায় শুরু করার নির্দেশ](START_HERE_BN.md) · [Validation evidence](VALIDATION.md)
 
 Reusable Android Unity tooling for **one Head + two implementation workers + one Reviewer/QA**.
+An optional **Game Idea / Design Partner** helps refine the concept before development.
+Start with [Idea chat](template/docs/IDEA_START_BN.md), then forward its filled
+[Head prompt](template/docs/HEAD_START_BN.md). These are role instructions for chats
+you open, not background agents.
+
 Python standard-library tools; pinned GitHub Actions; no automatic CI on push.
 
 > **Status:** v1 source/tooling implementation. Unity compilation, package resolution,
@@ -40,6 +45,7 @@ No forced upgrade path: changed managed files require manual diff/merge.
 ## What's included
 | Component | Job |
 |---|---|
+| Idea Partner + Head starter prompts | Discuss concept, then copy a self-contained brief to Head |
 | Head / Gameplay / Content / Reviewer-QA briefs | Human-copy-paste team; exclusive file ownership |
 | preflight.py | Syntax/JSON, merge markers, common secrets, generated files, meta/GUID checks |
 | plan_checks.py | Changed-file risk recommendation; never launches tests |
@@ -53,6 +59,7 @@ No forced upgrade path: changed managed files require manual diff/merge.
 | Minimal project source | Physics smoke tests + opt-in prototype scene creation at build |
 
 ## Fast daily loop
+0. Optional: discuss with Idea Partner; forward its finalized prompt to Head.
 1. Head writes two briefs; you forward them to workers.
 2. Workers implement in separate checkouts, add tests and run cheap preflight.
 3. Head integrates; Reviewer/QA reviews the candidate diff (read-only unless assigned test files).
@@ -92,4 +99,6 @@ MIT licensed. See [agent contract](AGENTS.md) and [consumer rules](template/AGEN
 New installs include agents/QA.md automatically. For existing games, review/merge the
 updated managed AGENTS block and role instructions, preserving all owner notes. The
 installer deliberately refuses changed-file overwrites; it is not an upgrade command.
-No new workflow, secret or SDK is required for the fourth role.
+The optional Idea Partner and full Bengali Head prompt install alongside these roles.
+Existing projects must also review/merge agents/IDEA.md and docs/*START_BN.md.
+No new workflow, secret or SDK is required for these roles.
